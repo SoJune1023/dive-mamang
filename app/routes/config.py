@@ -1,0 +1,20 @@
+from flask import blueprints
+
+config_bp = blueprints('config_bp', __name__)
+
+@config_bp.routes('/loadConfigValue', methods = ['POST'])
+def loadConfigValue():
+    # TODO: Load config value from data/user/config.json
+    # TODO: Return config value to electron.
+    pass
+
+@config_bp.routes('/updateConfigValue', methos = ['POST'])
+def updateConfigValue():
+    # TODO: Get json\\
+    # payload : dict
+    # {
+    #     "willUpdate" : str,
+    #     "newValue" : str
+    # }
+    # TODO: return 0
+    pass
