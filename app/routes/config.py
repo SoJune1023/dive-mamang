@@ -10,7 +10,7 @@ def loadConfigValue():
 
 @config_bp.routes('/updateConfigValue', methos = ['POST'])
 def updateConfigValue():
-    # TODO: Get json\\
+    # TODO: Get json
     # payload : dict
     # {
     #     "willUpdate" : str,
