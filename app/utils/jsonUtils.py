@@ -1,28 +1,28 @@
 import json
 
-def text_to_json(text_input):
-    """
-    Converts ChatGPT text response to JSON format.
+# def text_to_json(text_input):
+#     """
+#     Converts ChatGPT text response to JSON format.
 
-    Args:
-        text_input (str): Raw text output from ChatGPT.  
-            Example:
-            Here is your JSON!
-            {
-                "image": <image_URL>,
-                "conversation": "Today's wether . . ."
-            }
+#     Args:
+#         text_input (str): Raw text output from ChatGPT.  
+#             Example:
+#             Here is your JSON!
+#             {
+#                 "image": <image_URL>,
+#                 "conversation": "Today's wether . . ."
+#             }
 
-    Returns:
-        dict: Parsed JSON object with keys:
-            - "image" (str): Image URL
-            - "conversation" (str): ChatGPT response message
+#     Returns:
+#         dict: Parsed JSON object with keys:
+#             - "image" (str): Image URL
+#             - "conversation" (str): ChatGPT response message
 
-    Raises:
-        ValueError: If the text does not contain valid JSON.
-        json.JSONDecodeError: If JSON parsing fails.
-    """
-    pass
+#     Raises:
+#         ValueError: If the text does not contain valid JSON.
+#         json.JSONDecodeError: If JSON parsing fails.
+#     """
+#     pass
 
 def json_to_text(json_input):
     """
