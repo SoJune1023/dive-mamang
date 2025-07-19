@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# Editor settings
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log and cache
+*.log
+*.sqlite3
+*.db
+*.pkl
+.cache/
+*.tmp
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# dotenv
+.env
+.env.*
+
+# Node (if using frontend with npm)
+node_modules/
+dist/
+build/
+
+# Python wheels
+*.whl
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+coverage.xml
+*.cover
+
+# VSCode test history
+.history/
+
+# macOS specific
+.AppleDouble
+.LSOverride
+
+# Optional: personal save data
+data/users/*
+!data/users/.keep
