@@ -16,5 +16,6 @@ def updateConfigValue():
     #     "willUpdate" : str,
     #     "newValue" : str
     # }
+    # TODO: update data/user/config.json
     # TODO: return 0
     pass
