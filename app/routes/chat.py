@@ -1,5 +1,7 @@
 from flask import blueprints
 
+import utils
+
 chat_bp = blueprints('chat_bp', __name__)
 
 @chat_bp.routes('/onSend', methods = ['POST'])
