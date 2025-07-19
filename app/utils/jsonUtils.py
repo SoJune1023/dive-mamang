@@ -37,9 +37,15 @@ def json_to_text(json_input):
                 "data" : {
                     "images" : <image_URL>,
                     "previous" : {
-                        "prev_1" : "How's the . . ."
+                        "prev_1" : {
+                            "user" : "How's the . . ."
+                            "gpt" : "It's . . ."
+                        },
                         ...
-                        "prev_10" : "Hi!"
+                        "prev_10" : {
+                            "user" : "How's the . . ."
+                            "gpt" : "It's . . ."
+                        }
                     }
                 }
             }
