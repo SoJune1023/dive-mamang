@@ -33,7 +33,6 @@ def json_to_text(json_input):
             Example:
             {
                 "message" : "Good bye.",
-                "prompt" : "You're . . ."
                 "data" : {
                     "images" : <image_URL>,
                     "previous" : {
