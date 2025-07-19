@@ -1,6 +1,6 @@
-from flask import blueprints
+from flask import Blueprint
 
-config_bp = blueprints('config_bp', __name__)
+config_bp = Blueprint('config_bp', __name__)
 
 @config_bp.routes('/loadConfigValue', methods = ['POST'])
 def loadConfigValue():
