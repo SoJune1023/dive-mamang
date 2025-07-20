@@ -1,3 +1,5 @@
 {
-    
+    "API" : "api key here",
+    "Retries" : "int",
+    "time" : "float"
 }
