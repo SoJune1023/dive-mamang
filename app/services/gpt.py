@@ -9,10 +9,13 @@ class ResponseFormat(BaseModel):
     response_text: list[TextFormat]
     image: str
 
-def gpt_setup_client():
-    # TODO: set gpt client
-    # TODO: return client
-    pass
+def gpt_setup_client(key: str, time: float, retries: int) -> OpenAI:
+    client = OpenAI(
+        api_key = key,
+        timeout = time,
+        max_retries = retries
+    )
+    return client
 
 def gpt_send(client, model, prompt, message):
     """
