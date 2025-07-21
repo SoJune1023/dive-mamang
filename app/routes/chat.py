@@ -24,7 +24,7 @@ def onSend():
         user_note = payload.get("user_note", "")
 
         prompt = utils.prompt_loader()
-        gpt_prompt = utils.prompt_builder(prompt + user_note)
+        gpt_prompt = utils.prompt_builder(prompt, user_note)
     except Exception as e:
         logging.error(f"Could not get payload. Error code: {e}")
         return jsonify({"error": "could not retrieve message or user_note"}), 403
@@ -63,5 +63,5 @@ def onSend():
         logging.info(f'"CPU": {result_text}')
         return jsonify({"text": result_text, "image": response_image}), 200
     except Exception as e:
-        logging.error(f"could not load response from chat-gpt. Error code: {e}")
+        logging.error(f"Could not load response from chat-gpt. Error code: {e}")
         return jsonify({"error": "Could not load response from chat-gpt"}), 502
