@@ -1,9 +1,37 @@
 import json
 import logging
+from pathlib import Path
 
-def prompt_loader():
-    # TODO: load prompt from json
-    pass
+def prompt_loader() -> str:
+    """
+    data/prompt/prompt.json에서 character의 prompt를 load하여 프롬프트로 가공
+    
+    Returns:
+        prompt(str)
+
+    Raises:
+        Exception: prompt load 실패
+
+    """
+    try:
+        path = Path(__file__).parent.parent.parent / 'data' / 'prompt' / 'prompt.json'
+        with open(path, 'r', encoding = 'utf-8') as f:
+            data = json.load(f)
+
+        character_info = data["Character"]
+        character_other = data["Others"]
+
+        prompt = (
+            "[ 캐릭터 정보 ]\n"
+            + "\n".join(f"- {key}: {", ".join(value)}" for key, value in character_info.items())
+            + "\n\n"
+            + "[ 기타 ]\n"
+            + "\n".join(f"- {value}" for value in character_other)
+        )
+        return prompt
+    except Exception as e:
+        logging.error(f"Could not load 'data / prompt / prompt.json.' Error code: {e}")
+        raise Exception("Could not load 'data / prompt / prompt.json.'") from e
 
 def prompt_builder(prompt: str, user_note: str) -> str:
     """
