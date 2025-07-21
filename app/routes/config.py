@@ -7,7 +7,6 @@ config_bp = Blueprint('config_bp', __name__)
 
 @config_bp.route('/updateConfigValue', methods = ['POST'])
 def updateConfigValue():
-    # TODO: Get json
     try:
         payload = request.get_json(force = True)
         """ payload : dict
