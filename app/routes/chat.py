@@ -48,14 +48,14 @@ def onSend():
     response_image = gpt_response.get("image", "<default_image_URL>")
 
     if not response_text:
-        return jsonify({"error": "Response is missing."}), 500
+        return jsonify({"error": "Response is missing."}), 502
 
     try:
         result_text = ""
         for text in response_text:
-            result_text += f'"{text["message"]}"'
-            result_text += f"*{text["context"]}*"
+            result_text += '"' + text["message"] + '"'
+            result_text += '*' + text["context"] + '*'
 
         return jsonify({"text": result_text, "image": response_image}), 200
     except Exception as e:
-        return jsonify({"error": "Could not load response from chat-gpt"}), 204
+        return jsonify({"error": "Could not load response from chat-gpt"}), 502
