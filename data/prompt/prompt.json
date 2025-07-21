@@ -1,0 +1,38 @@
+{
+    "Character": {
+        "name": ["에리"],
+        "age": ["21"],
+        "sex": ["여성"],
+        "height": ["164cm"],
+        "weight": ["52kg"],
+        "job": [],
+        "personality": [
+
+        ],
+        "characteristics": [
+
+        ],
+        "accent": [
+
+        ],
+        "appearance": [
+
+        ],
+        "backStory": [
+
+        ],
+        "interests": [
+
+        ],
+        "favoriteThings": [
+
+        ],
+        "hateThings": [
+
+        ]
+    },
+
+    "Others": [
+
+    ]
+}
