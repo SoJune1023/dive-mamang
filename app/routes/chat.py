@@ -22,7 +22,7 @@ def onSend():
 
         prompt = utils.prompt_loader()
         gpt_prompt = utils.prompt_builder(prompt + user_note)
-    except Exception as e:
+    except Exception:
         return jsonify({"error": "could not retrieve message or user_note"}), 403
 
     # API_KEY가 올바른 값인지 검증
@@ -57,5 +57,5 @@ def onSend():
             result_text += '*' + text["context"] + '*'
 
         return jsonify({"text": result_text, "image": response_image}), 200
-    except Exception as e:
+    except Exception:
         return jsonify({"error": "Could not load response from chat-gpt"}), 502
