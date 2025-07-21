@@ -15,7 +15,8 @@ class Config:
     # TODO: app/services/gpt.py의 gpt_setup_client()에 필요한 함수인 key, time, retries 불러오기.
     API_KEY = data.get("API_KEY", "none")
     TIME = data.get("TIMEOUT", 120)
-    RETRIES = data.get("")
+    RETRIES = data.get("MAX_RETRIES")
+    MODEL = data.get("MODEL")
     # TODO: 위에서 불러온 값을 class를 활용하여 저장하기.
     # TODO: log 남기기.
     pass
