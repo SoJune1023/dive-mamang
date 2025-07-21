@@ -23,7 +23,7 @@ def prompt_loader() -> str:
 
         prompt = (
             "[ 캐릭터 정보 ]\n"
-            + "\n".join(f"- {key}: {", ".join(value)}" for key, value in character_info.items()) # example) hate things: water, chicken
+            + "\n".join(f"- {key}: {", ".join(value)}" for key, value in character_info.items()) # example) - hate things: water, chicken
             + "\n\n"
             + "[ 기타 ]\n"
             + "\n".join(f"- {value}" for value in character_other)
