@@ -35,8 +35,8 @@ def updateConfigValue():
         with open(path, 'w', encoding = 'utf-8') as f:
             json.dump(data, f, ensure_ascii = False, indent = 4)
 
+        logging.info(f"Config updated. Changed config: {will_update}, New value: {new_value}")
         return jsonify({"message": "Config updated"}), 200
-
     except Exception as e:
         logging.info(f"Could not change config value. Error code: {e}")
         return jsonify({"error": "Could not change config value"}), 500
