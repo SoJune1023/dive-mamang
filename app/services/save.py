@@ -1,4 +1,6 @@
 import json
+import logging
+from pathlib import Path
 
 def update_save(payload):
     """
@@ -6,7 +8,6 @@ def update_save(payload):
 
     Args:
         payload (dict): A dictionary containing the following keys:
-            - "image" (str): The image URL.
             - "conversation" (dict): A conversation object with:
                 - "user" (str): User's message.
                 - "gpt" (str): GPT's response.
@@ -17,3 +18,37 @@ def update_save(payload):
     Raises:
         Exception: If saving the file fails due to IO or JSON errors.
     """
+    try:
+        conversation = payload.get("conversation")
+        user_conversation = conversation.get("user")
+        gpt_conversation = conversation.get("gpt")
+
+        if not user_conversation or not gpt_conversation:
+            logging.error("Can not load conversation")
+            raise Exception ("Can not load conversation.")
+    except Exception as e:
+        logging.error(f"Can not load conversation. Error code: {e}")
+        raise Exception ("Can not load conversation.") from e
+
+    try:
+        path = Path(__file__).parent.parent.parent / 'data' / 'user' / 'save.json'
+        with open(path, 'r', encoding = 'utf-8') as f:
+            data = json.load(f)
+
+        # load previous conversation history.
+        # if emtpy -> create emtpy list
+        # history : list
+        # [{"user": <conversation>, "gpt": <conversation>} . . .]
+        conversation_history = data.get("history", [])
+
+        will_upload = {"user": user_conversation, "gpt": gpt_conversation}
+        conversation_history.append(will_upload)
+
+        with open(path, 'w', encoding = 'utf-8') as f:
+            json.dump(conversation_history, f, ensure_ascii = False, indent = 4)
+        
+        logging.info(f"Save success!\n\nUser : {user_conversation}\nGpt : {gpt_conversation}")
+        return 0
+    except Exception as e:
+        logging.error(f"Can not load data/user/save.json. Error code: {e}")
+        raise Exception ("Can not load data/user/save.json") from e
