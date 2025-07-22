@@ -24,8 +24,7 @@ def update_save(payload):
         gpt_conversation = conversation.get("gpt")
 
         if not user_conversation or not gpt_conversation:
-            logging.error("Can not load conversation")
-            raise Exception ("Can not load conversation.")
+            raise ValueError("Conversation content is missing.")
     except Exception as e:
         logging.error(f"Can not load conversation. Error code: {e}")
         raise Exception ("Can not load conversation.") from e
@@ -43,12 +42,27 @@ def update_save(payload):
 
         will_upload = {"user": user_conversation, "gpt": gpt_conversation}
         conversation_history.append(will_upload)
+        data["history"] = conversation_history
 
         with open(path, 'w', encoding = 'utf-8') as f:
-            json.dump(conversation_history, f, ensure_ascii = False, indent = 4)
+            json.dump(data, f, ensure_ascii = False, indent = 4)
         
         logging.info(f"Save success!\n\nUser : {user_conversation}\nGpt : {gpt_conversation}")
-        return 0
+        return True
     except Exception as e:
         logging.error(f"Can not load data/user/save.json. Error code: {e}")
+        raise Exception ("Can not load data/user/save.json") from e
+    
+def load_save_for_gpt():
+    try:
+        path = Path(__file__).parent.parent.parent / 'data' / 'user' / 'save.json'
+        with open(path, 'r', encoding = 'utf-8') as f:
+            data = json.load(f)
+
+        history_list = data.get("history", [])
+        history = history_list[-10:] if len(history_list) > 10 else history_list
+
+        return history
+    except Exception as e:
+        logging.error(f"Can not load data/user/save.json")
         raise Exception ("Can not load data/user/save.json") from e
