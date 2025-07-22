@@ -1,0 +1,7 @@
+{
+    "default": "",
+    "conversation" : [
+        {"user": "conversation", "gpt": "conversation"},
+        {"user": "conversation", "gpt": "conversation"}
+    ]
+}
