@@ -19,8 +19,6 @@ def onSend():
         """
 
         message = payload.get("message")
-        logging.info(f'"user": {message}')
-
         user_note = payload.get("user_note", "")
 
         prompt = utils.prompt_loader()
@@ -59,9 +57,11 @@ def onSend():
         for text in response_text:
             result_text += '"' + text["message"] + '"'
             result_text += '*' + text["context"] + '*'
-
-        logging.info(f'"CPU": {result_text}')
-        return jsonify({"text": result_text, "image": response_image}), 200
     except Exception as e:
         logging.error(f"Could not load response from chat-gpt. Error code: {e}")
         return jsonify({"error": "Could not load response from chat-gpt"}), 502
+
+    conversation = {"conversation": {"user": message, "gpt": result_text}}
+    services.update_save(conversation)
+
+    return jsonify({"text": result_text, "image": response_image}), 200
