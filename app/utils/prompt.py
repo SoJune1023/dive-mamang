@@ -4,7 +4,7 @@ from pathlib import Path
 
 def prompt_loader() -> str:
     """
-    data/prompt/prompt.json에서 character의 prompt를 load하여 프롬프트로 가공
+    data/character/prompt.json에서 character의 prompt를 load하여 프롬프트로 가공
     
     Returns:
         prompt(str)
@@ -14,7 +14,7 @@ def prompt_loader() -> str:
 
     """
     try:
-        path = Path(__file__).parent.parent.parent / 'data' / 'prompt' / 'prompt.json'
+        path = Path(__file__).parent.parent.parent / 'data' / 'character' / 'prompt.json'
         with open(path, 'r', encoding = 'utf-8') as f:
             data = json.load(f)
 
@@ -30,15 +30,15 @@ def prompt_loader() -> str:
         )
         return prompt
     except Exception as e:
-        logging.error(f"Could not load 'data / prompt / prompt.json.' Error code: {e}")
-        raise Exception("Could not load 'data / prompt / prompt.json.'") from e
+        logging.error(f"Could not load 'data / character / prompt.json.' Error code: {e}")
+        raise Exception("Could not load 'data / character / prompt.json.'") from e
 
 def prompt_builder(prompt: str, user_note: str) -> str:
     """
     prompt와 user_note를 받아 chat-gpt에게 보낼 하나의 프롬프트로 가공
 
     Args:
-        prompt(str): data/prompt/prompt.json에 저장 된 prompt의 가공 결과
+        prompt(str): data/character/prompt.json에 저장 된 prompt의 가공 결과
         user_note(str): 실시간으로 반영 되는 user_note
 
     Returns:
