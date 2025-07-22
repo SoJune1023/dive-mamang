@@ -42,7 +42,7 @@ def prompt_builder(prompt: str, user_note: str) -> str:
         user_note(str): 실시간으로 반영 되는 user_note
 
     Returns:
-        "[ PROMPT ]
+        [ PROMPT ]
         {prompt}
         [ USER_NOTE ]
         {user_note}
