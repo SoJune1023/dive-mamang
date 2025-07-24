@@ -45,7 +45,7 @@ def gpt_send(client, model, prompt, message, previous):
             input = [
                 {
                     "role": "system",
-                    "content": prompt + "[ Previous conversation ]" + previous
+                    "content": prompt + "\n[ Previous conversation ]\n" + [text for text in previous]
                 },
                 {
                     "role": "user",
