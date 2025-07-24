@@ -72,8 +72,13 @@ def onSend():
     """
 
     response_text = gpt_response.get("response_text")
-    # TODO: Compare with image list and if not match -> load default image url
-    response_image = gpt_response.get("image", "<default_image_URL>")
+
+    # 만약 img_list에 gpt_response img가 없을 경우 default img를 가져옵니다.
+    img_list = utils.load_img_list()
+    defalut_img = utils.load_default_img
+    response_image = gpt_response.get("image")
+    if not response_image in img_list:
+        response_image = defalut_img
 
     if not response_text:
         return jsonify({"error": "Response is missing."}), 502
