@@ -10,7 +10,25 @@ class ResponseFormat(BaseModel):
     response_text: list[TextFormat]
     image: str
 
+
+"""
+위에서 정의한 두 class에 의하여 response : dict는 다음 형식을 따르게 됩니다.
+{
+    response_text: [
+    {
+        message: <message>
+        context: <context>
+    }, {
+        message: <message>
+        contextL <constext>
+    }, . . .
+    ],
+    image: <image_URL>
+}
+"""
+
 def gpt_setup_client(key: str, time: float, retries: int) -> OpenAI:
+    # Gpt의 client를 set합니다.
     client = OpenAI(
         api_key = key,
         timeout = time,

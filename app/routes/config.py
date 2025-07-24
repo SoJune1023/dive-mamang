@@ -7,6 +7,7 @@ config_bp = Blueprint('config_bp', __name__)
 
 @config_bp.route('/updateConfigValue', methods = ['POST'])
 def updateConfigValue():
+    # Get payload
     try:
         payload = request.get_json(force = True)
         """ payload : dict
@@ -25,13 +26,16 @@ def updateConfigValue():
         logging.error(f"Config value is missing.\nFile: {__file__}\nError code: {e}")
         return jsonify({"error": "value is missing"}), 400
 
+    # Open data/user/config.json
     try:
         path = Path(__file__).parent.parent.parent / 'data' / 'user' / 'config.json'
         with open(path, 'r', encoding = 'utf-8') as f:
             data = json.load(f)
         
+        # Update new config value
         data[will_update] = new_value
 
+        # Update config
         with open(path, 'w', encoding = 'utf-8') as f:
             json.dump(data, f, ensure_ascii = False, indent = 4)
 

@@ -7,6 +7,7 @@ userNote_bp = Blueprint('userNote_bp', __name__)
 
 @userNote_bp.route('/onUploadUserNote', methods = ['POST'])
 def onUploadUserNote():
+    # Get payload
     try:
         payload = request.get_json(force = True)
         """ payload : dict
@@ -15,17 +16,20 @@ def onUploadUserNote():
         }
         """
 
+        # Check if user_note is emtpy
         user_note = payload.get("user_note")
-
         if not user_note:
             return jsonify({"error": "User note is missing"}), 400
 
+        # Open data/user/userNote.json
         path = Path(__file__).parent.parent.parent / 'data' / 'user' / 'userNote.json'
         with open(path, 'r', encoding = 'utf-8') as f:
             data = json.load(f)
 
+        # Update new user_note
         data["user_note"] = user_note
 
+        # Upload user_note
         with open(path, 'w', encoding = 'utf-8') as f:
             json.dump(data, f, ensure_ascii = False, indent = 4)
 

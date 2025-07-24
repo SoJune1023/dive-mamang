@@ -19,10 +19,13 @@ def update_save(payload):
         Exception: If saving the file fails due to IO or JSON errors.
     """
     try:
+        # Get payload[conversation]
         conversation = payload.get("conversation")
+        # Get user_conversation and gpt_conversation
         user_conversation = conversation.get("user")
         gpt_conversation = conversation.get("gpt")
 
+        # user_conversation과 gpt_conversation을 검증
         if not user_conversation or not gpt_conversation:
             raise ValueError("Conversation content is missing.")
     except Exception as e:
@@ -30,6 +33,7 @@ def update_save(payload):
         raise Exception ("Can not load conversation.") from e
 
     try:
+        # Open data/user/save.json
         path = Path(__file__).parent.parent.parent / 'data' / 'user' / 'save.json'
         with open(path, 'r', encoding = 'utf-8') as f:
             data = json.load(f)
@@ -40,10 +44,12 @@ def update_save(payload):
         # [{"user": <conversation>, "gpt": <conversation>} . . .]
         conversation_history = data.get("history", [])
 
+        # Update conversation
         will_upload = {"user": user_conversation, "gpt": gpt_conversation}
         conversation_history.append(will_upload)
         data["history"] = conversation_history
 
+        # Upload conversation
         with open(path, 'w', encoding = 'utf-8') as f:
             json.dump(data, f, ensure_ascii = False, indent = 4)
         
