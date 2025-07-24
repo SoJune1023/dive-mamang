@@ -9,6 +9,7 @@ chat_bp = Blueprint('chat_bp', __name__)
 
 @chat_bp.route('/onSend', methods = ['POST'])
 def onSend():
+    # Get payload.
     try:
         payload = request.get_json(force = True)
         """ payload : dict
@@ -18,10 +19,13 @@ def onSend():
         }
         """
 
+        # message, user_note가 비어있는 경우 " "로 대체
         message = payload.get("message", " ")
         user_note = payload.get("user_note", " ")
 
+        # load prompt from data/character/prompt.json
         prompt = utils.prompt_loader()
+        # build prompt
         gpt_prompt = utils.prompt_builder(prompt, user_note)
     except Exception as e:
         logging.error(f"Could not get payload.\nFile: {__file__}\nError code: {e}")
@@ -32,6 +36,7 @@ def onSend():
     previous = []
     previous_conversation = utils.gpt_load_previous_conversation()
 
+    # 읽기 편하게 previous_conversation을 변환
     if len(previous_conversation) > i:
         for text in previous_conversation:
             will_append = f"{i} message ago: \n'User': {text["user"]} 'System': {text["gpt"]}"
