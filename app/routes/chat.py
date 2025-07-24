@@ -86,6 +86,7 @@ def onSend():
     if not response_image in img_list:
         response_image = defalut_img
 
+    # Gpt response를 user가 읽기 쉬운 형태로 반환
     try:
         result_text = ""
         for text in response_text:
@@ -95,6 +96,7 @@ def onSend():
         logging.error(f"Could not load response from chat-gpt.\nFile: {__file__}\nError code: {e}")
         return jsonify({"error": "Could not load response from chat-gpt"}), 502
 
+    # upload conversation
     conversation = {"conversation": {"user": message, "gpt": result_text}}
     services.update_save(conversation) # update_save()내부에서 예외 처리 되어있음.
 
