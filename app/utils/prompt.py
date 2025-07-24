@@ -30,7 +30,7 @@ def prompt_loader() -> str:
         )
         return prompt
     except Exception as e:
-        logging.error(f"Could not load 'data / character / prompt.json.' Error code: {e}")
+        logging.error(f"Could not load 'data / character / prompt.json.'\nFile: {__file__}\nError code: {e}")
         raise Exception("Could not load 'data / character / prompt.json.'") from e
 
 def prompt_builder(prompt: str, user_note: str) -> str:

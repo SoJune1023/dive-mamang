@@ -1,3 +1,4 @@
+import logging
 from openai import OpenAI
 from pydantic import BaseModel
 
@@ -54,4 +55,5 @@ def gpt_send(client, model, prompt, message):
         )
         return response.output_parsed
     except Exception as e:
+        logging.error(f"Failed to get response from chat-gpt\nFile: {__file__}\nError code: {e}")
         raise RuntimeError("Failed to get response from chat-gpt") from e

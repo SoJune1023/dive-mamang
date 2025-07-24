@@ -1,4 +1,5 @@
 import json
+import logging
 from pathlib import Path
 from flask import request, Blueprint, jsonify
 
@@ -28,6 +29,8 @@ def onUploadUserNote():
         with open(path, 'w', encoding = 'utf-8') as f:
             json.dump(data, f, ensure_ascii = False, indent = 4)
 
+        logging.info(f"Success to upload user note.\nUser note: {user_note}")
         return jsonify({"message": "User note saved successfully."}), 200
     except Exception as e:
+        logging.error(f"Failed to upload user note\nFile: {__file__}\nError code: {e}")
         return jsonify({"error": f"Something went wrong", "details": str(e)}), 500

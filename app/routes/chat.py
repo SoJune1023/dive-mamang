@@ -24,7 +24,7 @@ def onSend():
         prompt = utils.prompt_loader()
         gpt_prompt = utils.prompt_builder(prompt, user_note)
     except Exception as e:
-        logging.error(f"Could not get payload. Error code: {e}")
+        logging.error(f"Could not get payload.\nFile: {__file__}\nError code: {e}")
         return jsonify({"error": "could not retrieve message or user_note"}), 403
 
     # API_KEY가 올바른 값인지 검증
@@ -58,7 +58,7 @@ def onSend():
             result_text += '"' + text["message"] + '"'
             result_text += '*' + text["context"] + '*'
     except Exception as e:
-        logging.error(f"Could not load response from chat-gpt. Error code: {e}")
+        logging.error(f"Could not load response from chat-gpt.\nFile: {__file__}\nError code: {e}")
         return jsonify({"error": "Could not load response from chat-gpt"}), 502
 
     conversation = {"conversation": {"user": message, "gpt": result_text}}

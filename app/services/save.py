@@ -26,7 +26,7 @@ def update_save(payload):
         if not user_conversation or not gpt_conversation:
             raise ValueError("Conversation content is missing.")
     except Exception as e:
-        logging.error(f"Can not load conversation. Error code: {e}")
+        logging.error(f"Can not load conversation.\nFile: {__file__}\nError code: {e}")
         raise Exception ("Can not load conversation.") from e
 
     try:
@@ -50,7 +50,7 @@ def update_save(payload):
         logging.info(f"Save success!\n\nUser : {user_conversation}\nGpt : {gpt_conversation}")
         return True
     except Exception as e:
-        logging.error(f"Can not load data/user/save.json. Error code: {e}")
+        logging.error(f"Can not load data/user/save.json.\nFile: {__file__}\nError code: {e}")
         raise Exception ("Can not load data/user/save.json") from e
     
 def load_save_for_gpt():
@@ -64,5 +64,5 @@ def load_save_for_gpt():
 
         return history
     except Exception as e:
-        logging.error(f"Can not load data/user/save.json")
+        logging.error(f"Can not load data/user/save.json\nFile: {__file__}\nError code: {e}")
         raise Exception ("Can not load data/user/save.json") from e
