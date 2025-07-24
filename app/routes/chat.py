@@ -75,6 +75,7 @@ def onSend():
     }
     """
 
+    # Get gpt response
     response_text = gpt_response.get("response_text")
     if not response_text:
         return jsonify({"error": "Response is missing."}), 502
