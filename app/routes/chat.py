@@ -18,7 +18,7 @@ def onSend():
         }
         """
 
-        message = payload.get("message")
+        message = payload.get("message", "")
         user_note = payload.get("user_note", "")
 
         prompt = utils.prompt_loader()
