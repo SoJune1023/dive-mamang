@@ -7,9 +7,7 @@ try:
     with open(path, 'r', encoding = 'utf-8') as f:
         data = json.load(f)
 except Exception as e:
-    #TODO: except시 error raises.
-    #TODO: log 남기기.
-    pass
+    logging.error(f"Failed to load data/user/config.json.\nFile: {__file__}\nError code: {e}")
 
 class Config:
     API_KEY = data.get("API_KEY", "none")
