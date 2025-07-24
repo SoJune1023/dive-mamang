@@ -1,9 +1,9 @@
 import logging
 from flask import Blueprint, request, jsonify
 
-import utils
-import services
-import loadConfig
+import app.utils as utils
+import app.services as services
+import app.loadConfig as loadConfig
 
 chat_bp = Blueprint('chat_bp', __name__)
 
