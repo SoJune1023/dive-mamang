@@ -12,11 +12,12 @@ except Exception as e:
     pass
 
 class Config:
-    # TODO: app/services/gpt.py의 gpt_setup_client()에 필요한 함수인 key, time, retries 불러오기.
     API_KEY = data.get("API_KEY", "none")
+    logging.info(f"Success to load API_KEY.\nAPI_KEY = {API_KEY}")
     MODEL = data.get("MODEL")
+    logging.info(f"Success to load MODEL.\nMODEL = {MODEL}")
     MAX_TIME = data.get("TIMEOUT", 120)
+    logging.info(f"Success to load MAX_TIME.\nMODEMAX_TIMEL = {MAX_TIME}")
     MAX_RETRIES = data.get("MAX_RETRIES", 2)
-    # TODO: 위에서 불러온 값을 class를 활용하여 저장하기.
-    # TODO: log 남기기.
+    logging.info(f"Success to load MAX_RETRIES.\nMAX_RETRIES = {MAX_RETRIES}")
     pass
