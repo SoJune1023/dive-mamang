@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify
 
 import app.utils as utils
 import app.services as services
-import app.loadConfig as loadConfig
+from app.loadConfig import Config
 
 chat_bp = Blueprint('chat_bp', __name__)
 
@@ -32,7 +32,7 @@ def onSend():
         return jsonify({"error": "could not retrieve message or user_note"}), 403
 
     # Load previous conversation
-    i = loadConfig.MAX_PREVIOUS
+    i = Config.MAX_PREVIOUS
     previous = []
     previous_conversation = utils.gpt_load_previous_conversation()
 
@@ -50,14 +50,14 @@ def onSend():
             i += -1
 
     # API_KEY가 올바른 값인지 검증
-    gpt_key = loadConfig.API_KEY
+    gpt_key = Config.API_KEY
     if not gpt_key:
         return jsonify({"error": "API_KEY is missing"}), 403
 
     # 해당 config는 default value가 있기에 비어있을 경우가 없음.
-    gpt_model = loadConfig.MODEL
-    gpt_time = loadConfig.MAX_TIME
-    gpt_retries = loadConfig.MAX_RETRIES
+    gpt_model = Config.MODEL
+    gpt_time = Config.MAX_TIME
+    gpt_retries = Config.MAX_RETRIES
 
     # gpt client 생성. -> type: OpenAI
     gpt_client = services.gpt_setup_client(gpt_key, gpt_time, gpt_retries)
