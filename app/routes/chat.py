@@ -10,6 +10,15 @@ chat_bp = Blueprint('chat_bp', __name__)
 @chat_bp.route('/onSend', methods = ['POST'])
 def onSend():
     try:
+        # TODO: load previous conversaions.
+        # previous_conversaion = load_previous_conversaion()
+        # app/utils/loadPrevious
+        pass
+    except Exception as e:
+        logging.error(f"Failed to load previous conversations.\nFile: {__file__}\nError code: {e}")
+        return jsonify({"error": "Failed to load previous conversations."}), 403
+    
+    try:
         payload = request.get_json(force = True)
         """ payload : dict
         {
