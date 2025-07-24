@@ -18,8 +18,8 @@ def onSend():
         }
         """
 
-        message = payload.get("message", "")
-        user_note = payload.get("user_note", "")
+        message = payload.get("message", " ")
+        user_note = payload.get("user_note", " ")
 
         prompt = utils.prompt_loader()
         gpt_prompt = utils.prompt_builder(prompt, user_note)
