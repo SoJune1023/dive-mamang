@@ -52,17 +52,3 @@ def update_save(payload):
     except Exception as e:
         logging.error(f"Can not load data/user/save.json.\nFile: {__file__}\nError code: {e}")
         raise Exception ("Can not load data/user/save.json") from e
-    
-def load_save_for_gpt():
-    try:
-        path = Path(__file__).parent.parent.parent / 'data' / 'user' / 'save.json'
-        with open(path, 'r', encoding = 'utf-8') as f:
-            data = json.load(f)
-
-        history_list = data.get("history", [])
-        history = history_list[-10:] if len(history_list) > 10 else history_list
-
-        return history
-    except Exception as e:
-        logging.error(f"Can not load data/user/save.json\nFile: {__file__}\nError code: {e}")
-        raise Exception ("Can not load data/user/save.json") from e
