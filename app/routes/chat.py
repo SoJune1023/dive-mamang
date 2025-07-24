@@ -32,12 +32,15 @@ def onSend():
     if not gpt_key:
         return jsonify({"error": "API_KEY is missing"}), 403
 
+    # 해당 config는 default value가 있기에 비어있을 경우가 없음.
     gpt_model = loadConfig.MODEL
     gpt_time = loadConfig.MAX_TIME
     gpt_retries = loadConfig.MAX_RETRIES
 
+    # gpt client 생성. -> type: OpenAI
     gpt_client = services.gpt_setup_client(gpt_key, gpt_time, gpt_retries)
     
+    # gpt response 생성.
     gpt_response = services.gpt_send(gpt_client, gpt_model, gpt_prompt, message)
     """ gpt_response : dict
     - response_text (List[TextFormat]):
@@ -47,6 +50,7 @@ def onSend():
     """
 
     response_text = gpt_response.get("response_text")
+    # TODO: Compare with image list and if not match -> load default image url
     response_image = gpt_response.get("image", "<default_image_URL>")
 
     if not response_text:
@@ -62,6 +66,7 @@ def onSend():
         return jsonify({"error": "Could not load response from chat-gpt"}), 502
 
     conversation = {"conversation": {"user": message, "gpt": result_text}}
-    services.update_save(conversation)
+    services.update_save(conversation) # update_save()내부에서 예외 처리 되어있음.
 
+    # TODO: Front end로 송신 기능 추가.
     return jsonify({"text": result_text, "image": response_image}), 200
