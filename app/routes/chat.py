@@ -65,10 +65,14 @@ def onSend():
     # gpt response 생성.
     gpt_response = services.gpt_send(gpt_client, gpt_model, gpt_prompt, message, previous)
     """ gpt_response : dict
-    - response_text (List[TextFormat]):
-        - message (str): 대화 내용
-        - context (str): 해당 메시지의 상황/맥락
-    - image (str): 이미지 URL
+    {
+        response_text (List[TextFormat]):
+        {
+            message (str): 대화 내용
+            context (str): 해당 메시지의 상황/맥락
+        },
+        image (str): 이미지 URL
+    }
     """
 
     response_text = gpt_response.get("response_text")
