@@ -14,3 +14,4 @@ class Config:
     MODEL = data.get("MODEL", "gpt-4o")
     MAX_TIME = data.get("TIMEOUT", 120)
     MAX_RETRIES = data.get("MAX_RETRIES", 2)
+    MAX_PREVIOUS = data.get("MAX_PREVIOUS", 7)
