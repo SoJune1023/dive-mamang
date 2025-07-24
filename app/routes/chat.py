@@ -10,15 +10,6 @@ chat_bp = Blueprint('chat_bp', __name__)
 @chat_bp.route('/onSend', methods = ['POST'])
 def onSend():
     try:
-        # TODO: load previous conversaions.
-        # previous_conversaion = load_previous_conversaion()
-        # app/utils/loadPrevious
-        pass
-    except Exception as e:
-        logging.error(f"Failed to load previous conversations.\nFile: {__file__}\nError code: {e}")
-        return jsonify({"error": "Failed to load previous conversations."}), 403
-    
-    try:
         payload = request.get_json(force = True)
         """ payload : dict
         {
@@ -36,6 +27,9 @@ def onSend():
         logging.error(f"Could not get payload.\nFile: {__file__}\nError code: {e}")
         return jsonify({"error": "could not retrieve message or user_note"}), 403
 
+    # Load previous conversation
+    previous_conversation = utils.gpt_load_previous_conversation()
+
     # API_KEY가 올바른 값인지 검증
     gpt_key = loadConfig.API_KEY
     if not gpt_key:
@@ -50,7 +44,7 @@ def onSend():
     gpt_client = services.gpt_setup_client(gpt_key, gpt_time, gpt_retries)
     
     # gpt response 생성.
-    gpt_response = services.gpt_send(gpt_client, gpt_model, gpt_prompt, message)
+    gpt_response = services.gpt_send(gpt_client, gpt_model, gpt_prompt, message, previous_conversation)
     """ gpt_response : dict
     - response_text (List[TextFormat]):
         - message (str): 대화 내용
