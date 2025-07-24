@@ -28,7 +28,21 @@ def onSend():
         return jsonify({"error": "could not retrieve message or user_note"}), 403
 
     # Load previous conversation
+    i = loadConfig.MAX_PREVIOUS
+    previous = []
     previous_conversation = utils.gpt_load_previous_conversation()
+
+    if len(previous_conversation) > i:
+        for text in previous_conversation:
+            will_append = f"{i} message ago: \n'User': {text["user"]} 'System': {text["gpt"]}"
+            previous.append(will_append)
+            i += -1
+    else:
+        i = len(previous_conversation)
+        for text in previous_conversation:
+            will_append = f"{i} message ago: \n'User': {text["user"]} 'System': {text["gpt"]}"
+            previous.append(will_append)
+            i += -1
 
     # API_KEY가 올바른 값인지 검증
     gpt_key = loadConfig.API_KEY
@@ -44,7 +58,7 @@ def onSend():
     gpt_client = services.gpt_setup_client(gpt_key, gpt_time, gpt_retries)
     
     # gpt response 생성.
-    gpt_response = services.gpt_send(gpt_client, gpt_model, gpt_prompt, message, previous_conversation)
+    gpt_response = services.gpt_send(gpt_client, gpt_model, gpt_prompt, message, previous)
     """ gpt_response : dict
     - response_text (List[TextFormat]):
         - message (str): 대화 내용
