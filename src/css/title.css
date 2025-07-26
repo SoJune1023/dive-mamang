@@ -1,0 +1,46 @@
+/* HEADER */
+#title_header {
+    width: 960px; margin: 0;
+    height: 160px;
+    float: left;
+}
+
+#title_header > #title {
+    position: relative;
+    left: 190px; top: 50px;
+    margin: 10px;
+    width: 300px;
+    height: 60px;
+    padding: none;
+    text-align: center;
+}
+
+/* SECTION */
+#title_section {
+    width: 960px;
+    height: 320px;
+    float: left;
+}
+
+/* BUTTON */
+#title_section > #button_location {
+    left: 190px; top: 40px;
+    width: 320px;
+    height: 240px;
+    position: relative;
+}
+
+.menu-button {
+    background-color: cornflowerblue;
+    width: 300px;
+    height: 60px;
+    position: relative;
+    margin: 10px;
+    outline: none;
+    border-radius: 3px;
+    border: none;
+}
+
+.menu-button:hover {
+    background-color: darkblue;
+}
