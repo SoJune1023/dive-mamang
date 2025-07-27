@@ -38,3 +38,14 @@ def onUploadUserNote():
     except Exception as e:
         logging.error(f"Failed to upload user note\nFile: {__file__}\nError code: {e}")
         return jsonify({"error": f"Something went wrong", "details": str(e)}), 500
+    
+def onLoadUserNote():
+    try:
+        path = Path(__file__).parent.parent.parent / 'data' / 'user' / 'userNote.json'
+        with open(path, 'r', encoding = 'utf-8') as f:
+            data = json.load(f)
+
+        return data["user_note"]
+    except Exception as e:
+        logging.error(f"Failed to load user note\nFile: {__file__}\nError code: {e}")
+        return jsonify({"error": f"Something went wrong", "details": str(e)}), 500
