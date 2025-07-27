@@ -21,14 +21,13 @@ def prompt_loader() -> str:
         character_info = data["Character"]
         character_other = data["Others"]
 
-        prompt = (
+        return (
             "[ 캐릭터 정보 ]\n"
             + "\n".join(f"- {key}: {", ".join(value)}" for key, value in character_info.items()) # example) - hate things: water, chicken
             + "\n\n"
             + "[ 기타 ]\n"
             + "\n".join(f"- {value}" for value in character_other)
         )
-        return prompt
     except Exception as e:
         logging.error(f"Could not load 'data / character / prompt.json.'\nFile: {__file__}\nError code: {e}")
         raise Exception("Could not load 'data / character / prompt.json.'") from e
