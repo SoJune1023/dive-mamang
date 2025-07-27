@@ -61,14 +61,11 @@ def gpt_send(client, model, prompt, message, previous):
         response = client.responses.parse(
             model = model,
             input = [
-                {
-                    "role": "system",
-                    "content": prompt + "\n[ Previous conversation ]\n" + [text for text in previous]
-                },
-                {
-                    "role": "user",
-                    "content": message
-                }
+                {"role": "system", "content":
+                    prompt
+                    + "\n[ Previous conversation ]\n"
+                    + [text for text in previous]},
+                {"role": "user", "content": message}
             ],
             text_format = ResponseFormat
         )
